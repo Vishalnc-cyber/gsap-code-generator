@@ -7,6 +7,8 @@ import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import ElementComponent from './ElementComponent';
 import { eventlist } from '../common/lists';
+import Button from '@mui/material/Button';
+import Divider from '@mui/material/Divider';
 
 const useStyles = makeStyles({
     eventContainer: {
@@ -15,25 +17,28 @@ const useStyles = makeStyles({
         border: "2px solid #282c34",
         width: "30%",
         height: "500px",
-        padding: "10px 0px"
+        padding: "10px 0px",
+        overflow: "auto"
     },
     keyValueStyle: {
         display: "flex",
         justifyContent: "space-between",
-        padding: "0px 10px",
+        padding: "10px 10px",
         margin: "10px 0px"
     },
     keyStyle: {
         alignItems: "center",
         display: "flex",
         justifyContent: "center"
+    },
+    dividerStyle: {
+        height: "5px",
+        backgroundColor: "green"
     }
 });
 
 function EventDiv(props) {
     const classes = useStyles();
-
-
 
     // console.log(props)
     return (
@@ -61,8 +66,29 @@ function EventDiv(props) {
                     </Select>
                 </FormControl>
             </div>
+            <div style={{ width: "25%" }}>
+                <Button
+                    variant="outlined"
+                    size="small"
+                    onClick={(e) => props?.handleAddMoreTargetElementButtonClick(e)}
+                >+ADD</Button>
+            </div>
+            <Divider variant="li" sx={{ marginTop: "10px" }} />
+            {
+                props.targetElements.map((ele, i) =>
+                    <ElementComponent
+                        selectedTween={ele.selectedTween}
+                        targetElementValue={ele.targetElementValue}
+                        selectedAnimationProperty={ele.selectedAnimationProperty}
+                        animationValue={ele.animationValue}
+                        handleDeleteTargetElement={props.handleDeleteTargetElement}
+                        handleTargetElementEvents={props.handleTargetElementEvents}
+                        index={i}
+                        classes={classes}
+                    />
+                )
+            }
 
-            <ElementComponent {...props} classes={classes} />
 
 
         </div>

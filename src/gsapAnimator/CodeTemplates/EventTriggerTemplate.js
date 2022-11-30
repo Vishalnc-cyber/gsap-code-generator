@@ -1,21 +1,22 @@
 
 export const EventTriggerTemplate = (selectedOptions) => {
-    return `window.addEventListener('${selectedOptions.selectedTriggerEvent}'), () => {
-    ${selectedOptions.timeLine ? TimeLineGenerator(selectedOptions) : ""}
+    // console.log(selectedOptions)
+    let template = `window.addEventListener('${selectedOptions.selectedTriggerEvent}'), () => {
+    var timeline1 = gsap.timeline({ 
+        ${selectedOptions.targetElements && selectedOptions.targetElements.length > 0 ? targetElementTemplate(selectedOptions) : ""}
+    })
     })`
+    console.log(template)
+    return template
 }
 
-const TimeLineGenerator = (selectedOptions) => {
-    console.log(selectedOptions)
-    return `var timeline1 = gsap.timeline({ 
-        ${selectedOptions.targetElementValue
-            && selectedOptions.selectedTween
-            && selectedOptions.selectedAnimationProperty
-            && selectedOptions.animationValue ? targetElementTemplate(selectedOptions) : ""}
-     })`
-}
+export const targetElementTemplate = (ele) => {
+    console.log(ele)
+    let allgsap = ""
+    ele.targetElements.forEach(e => {
+        allgsap = `${e.selectedTween ? e.selectedTween : ""}` + `("${e.targetElementValue ? e.targetElementValue : ""}", 
+        {${e.selectedAnimationProperty ? e.selectedAnimationProperty : ""} : ${e.animationValue ? e.animationValue : ""}})`
+    })
+    return allgsap
 
-export const targetElementTemplate = (selectedOptions) => {
-    console.log(selectedOptions)
-    return `.${selectedOptions.selectedTween}("${selectedOptions.targetElementValue}",{${selectedOptions.selectedAnimationProperty} : ${selectedOptions.animationValue}})`
 }
