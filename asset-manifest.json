@@ -1,13 +1,13 @@
 {
   "files": {
     "main.css": "/gsap-code-generator/static/css/main.0d388d57.css",
-    "main.js": "/gsap-code-generator/static/js/main.81edc5f4.js",
+    "main.js": "/gsap-code-generator/static/js/main.adee3771.js",
     "index.html": "/gsap-code-generator/index.html",
     "main.0d388d57.css.map": "/gsap-code-generator/static/css/main.0d388d57.css.map",
-    "main.81edc5f4.js.map": "/gsap-code-generator/static/js/main.81edc5f4.js.map"
+    "main.adee3771.js.map": "/gsap-code-generator/static/js/main.adee3771.js.map"
   },
   "entrypoints": [
     "static/css/main.0d388d57.css",
-    "static/js/main.81edc5f4.js"
+    "static/js/main.adee3771.js"
   ]
 }
