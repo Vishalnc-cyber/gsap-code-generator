@@ -1,22 +1,61 @@
+import { useState } from "react"
 
 export const EventTriggerTemplate = (selectedOptions) => {
-    // console.log(selectedOptions)
-    let template = `window.addEventListener('${selectedOptions.selectedTriggerEvent}'), () => {
-    var timeline1 = gsap.timeline({ 
-        ${selectedOptions.targetElements && selectedOptions.targetElements.length > 0 ? targetElementTemplate(selectedOptions) : ""}
-    })
-    })`
-    console.log(template)
+    // const [state, setState] = useState({
+    //     EventSelectTemplate: `window.addEventListener('${selectedOptions.selectedTriggerEvent}', () => {`,
+    //     EventSelectTemplateEnd: `})`,
+    //     TimelineTemplate: `var timeline1 = gsap.timeline({ `,
+    //     TimelineTemplateEnd: `})`,
+    //     gsaptweenLines: ``,
+    //     tweenArray: [],
+
+    // })
+
+    let EventSelectTemplate = `window.addEventListener('${selectedOptions.selectedTriggerEvent}', () => {`
+    let EventSelectTemplateEnd = `})`
+    let TimelineTemplate = `var timeline1 = gsap.timeline({ `
+    let TimelineTemplateEnd = `})`
+    let tweenArray = []
+    let gsaptweenLines = ""
+
+    if (selectedOptions.targetElements) {
+        tweenArray = targetElementTemplate(selectedOptions.targetElements)
+
+        gsaptweenLines = tweenArray.join("\n")
+
+    }
+    let template = `${selectedOptions.selectedTriggerEvent
+        ? EventSelectTemplate + "\n" + gsaptweenLines + "\n" + EventSelectTemplateEnd : ""}`
+    // console.log(template)
     return template
 }
 
-export const targetElementTemplate = (ele) => {
-    console.log(ele)
-    let allgsap = ""
-    ele.targetElements.forEach(e => {
-        allgsap = `${e.selectedTween ? e.selectedTween : ""}` + `("${e.targetElementValue ? e.targetElementValue : ""}", 
-        {${e.selectedAnimationProperty ? e.selectedAnimationProperty : ""} : ${e.animationValue ? e.animationValue : ""}})`
-    })
-    return allgsap
+export const targetElementTemplate = (elements) => {
+    // console.log(elements)
+    let elementArray = []
+
+    elements.forEach((element, i) => {
+        if (element.selectedTween && element.targetElementValue
+            && element.selectedAnimationProperty && element.animationValue) {
+            console.log("1")
+            elementArray[i] = (`${i === 0 ? "timeline1" : ""}.${element.selectedTween}("${element.targetElementValue}", { ${element.selectedAnimationProperty} : ${element.animationValue} })`)
+        } else
+            if (element.selectedTween && element.targetElementValue && element.selectedAnimationProperty) {
+                console.log("2")
+                elementArray[i] = (`${i === 0 ? "timeline1" : ""}.${element.selectedTween}("${element.targetElementValue}", { ${element.selectedAnimationProperty} : })`)
+            } else
+                if (element.selectedTween && element.targetElementValue) {
+                    console.log("3")
+                    elementArray[i] = (`${i === 0 ? "timeline1" : ""}.${element.selectedTween}("${element.targetElementValue}", { })`)
+                } else
+                    if (element.selectedTween) {
+                        console.log("4")
+                        elementArray[i] = (`${i === 0 ? "timeline1" : ""}.${element.selectedTween}()`)
+                    }
+
+
+    });
+    // console.log(elementArray)
+    return elementArray
 
 }

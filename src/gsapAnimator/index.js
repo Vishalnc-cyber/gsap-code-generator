@@ -23,13 +23,13 @@ export class GsapAnimator extends Component {
         }
     }
     handleAddMoreTargetElementButtonClick = () => {
-        console.log("added")
+        // console.log("added")
         let targetElements = [...this.state.targetElements]
         targetElements.push({
             selectedTween: null, targetElementValue: null,
             selectedAnimationProperty: null, animationValue: null
         })
-        console.log(targetElements)
+        // console.log(targetElements)
         this.setState({
             targetElements
         })

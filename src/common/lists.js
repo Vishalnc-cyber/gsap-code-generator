@@ -44,7 +44,7 @@ const animationPropertiesList = [
     {
         id: 1,
         value: "y",
-        label: "From-To"
+        label: "y"
     },
     {
         id: 1,
