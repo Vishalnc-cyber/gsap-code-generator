@@ -6,25 +6,24 @@ import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import { tweensList, animationPropertiesList } from '../common/lists';
+import Divider from '@mui/material/Divider';
+import Button from '@mui/material/Button';
 
 export class ElementComponent extends Component {
     render() {
-        const { classes } = this.props
+        const { classes, index } = this.props
         // console.log(this.props)
         return (
             <div>
-                <div className={classes.keyValueStyle}>
-                    <Typography className={classes.keyStyle}>Target Element</Typography>
+                <div style={{ display: "flex", justifyContent: "space-between", marginTop: "5px", padding: "0px 10px" }}>
+                    <div>
 
-                    <TextField
-                        style={{ width: "50%" }}
-                        size="small"
-                        id="outlined-basic"
-                        label="Class/ID/Attribute"
+                    </div>
+                    <Button
                         variant="outlined"
-                        value={this.props.targetElementValue}
-                        onChange={(e) => this.props.eventHandler(e, "targetElementValue")}
-                    />
+                        size="small"
+                        onClick={(e) => this.props?.handleDeleteTargetElement(e, index)}
+                    >X</Button>
                 </div>
                 <div className={classes.keyValueStyle}>
                     <Typography className={classes.keyStyle}>Tween</Typography>
@@ -36,7 +35,7 @@ export class ElementComponent extends Component {
                             id="demo-simple-select"
                             value={this.props.selectedTween}
                             label="Tween"
-                            onChange={(e) => this.props.eventHandler(e, "selectedTween")}
+                            onChange={(e) => this.props.handleTargetElementEvents(e, index, "selectedTween")}
                             size="small"
                         >
                             <MenuItem value={null} disabled>Select Any</MenuItem>
@@ -50,6 +49,21 @@ export class ElementComponent extends Component {
                 </div>
 
                 <div className={classes.keyValueStyle}>
+                    <Typography className={classes.keyStyle}>Target Element</Typography>
+
+                    <TextField
+                        style={{ width: "50%" }}
+                        size="small"
+                        id="outlined-basic"
+                        label="Class/ID/Attribute"
+                        variant="outlined"
+                        value={this.props.targetElementValue}
+                        onChange={(e) => this.props.handleTargetElementEvents(e, index, "targetElementValue")}
+                    />
+                </div>
+
+
+                <div className={classes.keyValueStyle}>
                     {/* <Typography className={classes.keyStyle}>Animation</Typography> */}
 
                     <FormControl style={{ width: "48%" }}>
@@ -59,7 +73,7 @@ export class ElementComponent extends Component {
                             id="demo-simple-select"
                             value={this.props.selectedAnimationProperty}
                             label="Prperty"
-                            onChange={(e) => this.props.eventHandler(e, "selectedAnimationProperty")}
+                            onChange={(e) => this.props.handleTargetElementEvents(e, index, "selectedAnimationProperty")}
                             size="small"
                         >
                             <MenuItem value={null} disabled>Select Any</MenuItem>
@@ -78,9 +92,11 @@ export class ElementComponent extends Component {
                         label="Value"
                         variant="outlined"
                         value={this.props.animationValue}
-                        onChange={(e) => this.props.eventHandler(e, "animationValue")}
+                        onChange={(e) => this.props.handleTargetElementEvents(e, index, "animationValue")}
                     />
+
                 </div>
+                <Divider variant="li" />
             </div>
         )
     }
