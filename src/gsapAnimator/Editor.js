@@ -5,7 +5,7 @@ export const Editor = ({ placeHolder, eventHandler, onKeyDown, code }) => {
     return (
         <div className="editor-container">
             <textarea
-                readonly="true"
+                readOnly="true"
                 className="editor"
                 placeholder={placeHolder}
                 onChange={eventHandler}

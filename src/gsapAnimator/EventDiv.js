@@ -79,10 +79,15 @@ function EventDiv(props) {
                     <ElementComponent
                         selectedTween={ele.selectedTween}
                         targetElementValue={ele.targetElementValue}
-                        selectedAnimationProperty={ele.selectedAnimationProperty}
-                        animationValue={ele.animationValue}
+                        animations={ele.animations}
+                        targetElementTypeValue={ele.targetElementTypeValue}
+                        // selectedAnimationProperty={ele.selectedAnimationProperty}
+                        // animationValue={ele.animationValue}
+                        handleDeleteAnimationObject={props.handleDeleteAnimationObject}
+                        handleAddMoreAnimationObject={props.handleAddMoreAnimationObject}
                         handleDeleteTargetElement={props.handleDeleteTargetElement}
                         handleTargetElementEvents={props.handleTargetElementEvents}
+                        handleAnimationObjectValueChange={props.handleAnimationObjectValueChange}
                         index={i}
                         classes={classes}
                     />
